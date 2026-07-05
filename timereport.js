@@ -10,73 +10,188 @@ backButton.addEventListener("click", () => {
 
 });
 
-
 const report = JSON.parse(localStorage.getItem("analysisReport"));
 
-if (report) {
+if (!report) {
 
-    // Estimated Complexity
+    alert("No report found.");
 
-    document.getElementById("overallComplexity").textContent =
-        report.complexity.time.overall;
-
-    document.getElementById("bestCase").textContent =
-        report.complexity.time.best;
-
-    document.getElementById("averageCase").textContent =
-        report.complexity.time.average;
-
-    document.getElementById("worstCase").textContent =
-        report.complexity.time.worst;
-
-    // Summary
-
-    document.getElementById("loopCount").textContent =
-        report.analysis.loops;
-
-    document.getElementById("nestedLoops").textContent =
-        report.analysis.maxLoopDepth;
-
-    document.getElementById("recursiveCalls").textContent =
-        report.analysis.recursion;
-
-    document.getElementById("functionCalls").textContent =
-        report.analysis.functionCalls.length;
+    throw new Error("No Report");
 
 }
-const timelineContainer =
-    document.getElementById("timelineContainer");
 
-timelineContainer.innerHTML = "";
+// ============================================
+// Estimated Complexity
+// ============================================
 
-report.timeline.forEach(item => {
+document.getElementById("overallComplexity").textContent =
+report.complexity.time.overall;
 
-    timelineContainer.innerHTML += `
+document.getElementById("bestCase").textContent =
+report.complexity.time.best;
 
-    <div class="timeline-item">
+document.getElementById("averageCase").textContent =
+report.complexity.time.average;
 
-        <div class="timeline-left">
+document.getElementById("worstCase").textContent =
+report.complexity.time.worst;
 
-            ${item.line}
+// ============================================
+// Summary
+// ============================================
+
+document.getElementById("loopCount").textContent =
+report.analysis.loops;
+
+document.getElementById("nestedLoops").textContent =
+report.analysis.maxLoopDepth;
+
+document.getElementById("recursiveCalls").textContent =
+report.analysis.recursion;
+
+document.getElementById("functionCalls").textContent =
+report.analysis.functionCalls.length;
+
+document.getElementById("constantOps").textContent =
+Math.max(
+    0,
+    report.analysis.functionCalls.length -
+    report.analysis.algorithms.length
+);
+
+// ============================================
+// Timeline
+// ============================================
+
+const timeline =
+document.getElementById("timelineContainer");
+
+timeline.innerHTML = "";
+
+if(report.timeline.length===0){
+
+    timeline.innerHTML =
+
+    "<p>No time-complexity events detected.</p>";
+
+}
+
+else{
+
+    report.timeline.forEach(item=>{
+
+        timeline.innerHTML+=`
+
+        <div class="timeline-item">
+
+            <div class="timeline-left">
+
+                Line ${item.line}
+
+            </div>
+
+            <div class="timeline-right">
+
+                <h3>${item.title}</h3>
+
+                <p>
+
+                    Complexity
+
+                    <strong>${item.complexity}</strong>
+
+                </p>
+
+            </div>
 
         </div>
 
-        <div class="timeline-right">
+        `;
 
-            <h3>${item.title}</h3>
+    });
 
-            <p>
+}
 
-                Complexity
+// ============================================
+// Algorithms Used
+// ============================================
 
-                <strong>${item.complexity}</strong>
+const algoList =
+document.getElementById("algorithmList");
 
-            </p>
+algoList.innerHTML = "";
 
-        </div>
+if(report.analysis.algorithms.length===0){
 
-    </div>
+    algoList.innerHTML =
 
-    `;
+    "<li>No STL algorithms detected.</li>";
 
-});
+}
+
+else{
+
+    report.analysis.algorithms.forEach(algo=>{
+
+        algoList.innerHTML +=
+
+        `<li>
+
+            <strong>${algo.name}</strong>
+
+            (${algo.time})
+
+        </li>`;
+
+    });
+
+}
+
+// ============================================
+// Assumptions
+// ============================================
+
+const assumptions =
+document.getElementById("timeAssumptions");
+
+assumptions.innerHTML = "";
+
+if(report.analysis.algorithms.length===0){
+
+    assumptions.innerHTML =
+
+    "<li>No algorithm-specific assumptions were required.</li>";
+
+}
+
+else{
+
+    report.analysis.algorithms.forEach(algo=>{
+
+        assumptions.innerHTML +=
+
+        `<li>
+
+            <strong>${algo.name}</strong>
+
+            assumed to run in
+
+            <strong>${algo.time}</strong>.
+
+        </li>`;
+
+    });
+
+}
+
+if(report.analysis.recursion>0){
+
+    assumptions.innerHTML +=
+
+    `<li>
+
+        Recursive calls are assumed to have linear depth unless otherwise inferred.
+
+    </li>`;
+
+}

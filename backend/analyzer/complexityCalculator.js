@@ -14,83 +14,129 @@ function calculateComplexity(report) {
         contributors: []
     };
 
-    let polynomialPower = report.maxLoopDepth;
-    let hasLog = false;
+    // Polynomial power from loops
+    let nPower = report.maxLoopDepth;
 
-    // Analyze algorithms
+    // Log factor
+    let logPower = 0;
+
+    //----------------------------------------
+    // STL Algorithms
+    //----------------------------------------
+
     for (const algo of report.algorithms) {
 
         time.contributors.push(algo.name);
 
-        if (algo.time.includes("log n")) {
+        switch (algo.name) {
 
-            hasLog = true;
+            case "sort":
+            case "stable_sort":
+
+                nPower += algo.loopDepth;
+                logPower = Math.max(logPower,1);
+
+                break;
+
+            case "reverse":
+
+                nPower = Math.max(nPower,algo.loopDepth+1);
+
+                break;
+
+            case "binary_search":
+            case "lower_bound":
+            case "upper_bound":
+
+                logPower = Math.max(logPower,1);
+
+                if(algo.loopDepth>0){
+
+                    nPower=Math.max(nPower,algo.loopDepth);
+
+                }
+
+                break;
+
+            case "nth_element":
+
+                nPower=Math.max(nPower,algo.loopDepth+1);
+
+                break;
 
         }
 
-        // sort() contributes an additional n factor because it is O(n log n)
-        if (algo.time.startsWith("O(n")) {
+    }
+    //----------------------------------------
+// Recursion
+//----------------------------------------
 
-            polynomialPower += algo.loopDepth;
+    if (report.recursion > 0 && nPower === 0) {
+        // Assume linear recursion for common cases
+        nPower = 1;
+        time.contributors.push("Recursion");
+    }    
+
+    //----------------------------------------
+    // Generate Big O
+    //----------------------------------------
+
+    let ans="O(";
+
+    if(nPower==0 && logPower==0){
+
+        ans+="1";
+
+    }
+
+    else{
+
+        if(nPower==1){
+
+            ans+="n";
+
+        }
+
+        else if(nPower>1){
+
+            ans+=`n^${nPower}`;
+
+        }
+
+        if(logPower){
+
+            if(nPower>0) ans+=" ";
+
+            ans+="log n";
 
         }
 
     }
 
-    // Build Big-O string
-    if (polynomialPower === 0 && !hasLog) {
+    ans+=")";
 
-        time.overall = "O(1)";
+    time.overall=ans;
+    time.best=ans;
+    time.average=ans;
+    time.worst=ans;
 
-    }
-
-    else {
-
-        let result = "O(";
-
-        if (polynomialPower === 1) {
-
-            result += "n";
-
-        }
-
-        else if (polynomialPower > 1) {
-
-            result += `n^${polynomialPower}`;
-
-        }
-
-        if (hasLog) {
-
-            if (polynomialPower > 0) result += " ";
-
-            result += "log n";
-
-        }
-
-        result += ")";
-
-        time.overall = result;
-        time.best = result;
-        time.average = result;
-        time.worst = result;
-
-    }
-
+    //----------------------------------------
     // Space
-    if (report.containers.length) {
+    //----------------------------------------
 
-        space.overall = "O(n)";
+    if(report.containers.length){
 
-        for (const container of report.containers) {
+        space.overall="O(n)";
 
-            space.contributors.push(container.name);
+        report.containers.forEach(c=>{
 
-        }
+            space.contributors.push(c.name);
+
+        });
 
     }
 
-    return {
+    return{
 
         time,
 
@@ -100,4 +146,4 @@ function calculateComplexity(report) {
 
 }
 
-module.exports = calculateComplexity;
+module.exports=calculateComplexity;

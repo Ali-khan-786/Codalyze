@@ -32,16 +32,23 @@ function functionDefinitionVisitor(node, report) {
 
     const declarator = node.childForFieldName("declarator");
 
-    if (!declarator) return;
+    if (!declarator) return null;
 
     const identifier = declarator.childForFieldName("declarator");
 
-    if (!identifier) return;
+    if (!identifier) return null;
+
+    const name = identifier.text;
 
     report.functionDefinitions.push({
-        name: identifier.text,
+
+        name,
+
         line: identifier.startPosition.row + 1
+
     });
+
+    return name;
 
 }
 
@@ -76,6 +83,9 @@ function functionCallVisitor(node, report) {
         line: func.startPosition.row + 1
 
     });
+    if(name===report.currentFunction){
+        report.recursion++
+    }
 
 }
 

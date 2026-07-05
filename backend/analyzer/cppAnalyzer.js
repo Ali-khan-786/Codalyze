@@ -23,9 +23,9 @@ function analyzeCpp(code) {
 
         loops: 0,
         maxLoopDepth: 0,
-
+        loopLines: [],
         recursion: 0,
-
+        currentFunction: null,
         functionDefinitions: [],
         functionCalls: [],
         containers: [],
@@ -48,6 +48,7 @@ function analyzeCpp(code) {
         for_statement(node, report, depth) {
 
             report.loops++;
+            report.loopLines.push(node.startPosition.row + 1);
             report.maxLoopDepth = Math.max(report.maxLoopDepth, depth + 1);
 
         },
@@ -55,6 +56,7 @@ function analyzeCpp(code) {
         while_statement(node, report, depth) {
 
             report.loops++;
+            report.loopLines.push(node.startPosition.row + 1);
             report.maxLoopDepth = Math.max(report.maxLoopDepth, depth + 1);
 
         },
@@ -62,15 +64,16 @@ function analyzeCpp(code) {
         do_statement(node, report, depth) {
 
             report.loops++;
+            report.loopLines.push(node.startPosition.row + 1);
             report.maxLoopDepth = Math.max(report.maxLoopDepth, depth + 1);
 
         },
 
         function_definition(node, report) {
 
-            functionDefinitionVisitor(node, report);
+            report.currentFunction =functionDefinitionVisitor(node, report);
 
-        },
+        },        
         type_identifier(node, report,depth) {
             containerVisitor(node, report,depth);
         },

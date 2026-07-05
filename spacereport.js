@@ -12,43 +12,73 @@ backButton.addEventListener("click", () => {
 
 const report = JSON.parse(localStorage.getItem("analysisReport"));
 
-if(report){
+if (!report) {
 
-    document.getElementById("overallSpace").textContent =
-        report.complexity.space.overall;
+    alert("No report found.");
 
-    document.getElementById("vectorCount").textContent =
-        report.analysis.vectors;
-
-    document.getElementById("mapCount").textContent =
-        report.analysis.maps;
-
-    document.getElementById("unorderedMapCount").textContent =
-        report.analysis.unorderedMaps;
-
-    document.getElementById("queueCount").textContent =
-        report.analysis.queues;
-
-    document.getElementById("stackCount").textContent =
-        report.analysis.stacks;
-
-    document.getElementById("priorityQueueCount").textContent =
-        report.analysis.priorityQueues;
+    throw new Error("No report");
 
 }
-const memoryTimeline = document.getElementById("memoryTimeline");
 
-memoryTimeline.innerHTML = "";
+// ============================================
+// Overall Space
+// ============================================
 
-report.analysis.containers.forEach(container => {
+document.getElementById("overallSpace").textContent =
+report.complexity.space.overall;
 
-    memoryTimeline.innerHTML += `
+// ============================================
+// Data Structures Used
+// ============================================
+
+const list = document.getElementById("dataStructuresList");
+
+list.innerHTML = "";
+
+if(report.analysis.containers.length===0){
+
+    list.innerHTML="<li>No data structures detected.</li>";
+
+}
+
+else{
+
+    report.analysis.containers.forEach(container=>{
+
+        list.innerHTML += `
+
+        <li>
+
+            <strong>${container.name}</strong>
+
+            (${container.category})
+
+        </li>
+
+        `;
+
+    });
+
+}
+
+// ============================================
+// Memory Breakdown
+// ============================================
+
+const memoryTimeline =
+document.getElementById("memoryTimeline");
+
+memoryTimeline.innerHTML="";
+
+report.analysis.containers.forEach(container=>{
+
+    memoryTimeline.innerHTML+=`
 
     <div class="timeline-item">
 
         <div class="timeline-left">
 
-            Line ${container.line}
+            ${container.line}
 
         </div>
 
@@ -71,53 +101,71 @@ report.analysis.containers.forEach(container => {
     `;
 
 });
-const major = document.getElementById("majorContributors");
 
-major.innerHTML = "";
+if(report.analysis.containers.length===0){
 
-report.analysis.containers.forEach(container => {
+    memoryTimeline.innerHTML=`
 
-    major.innerHTML +=
+    <p>No dynamic data structures detected.</p>
 
-        `<li>${container.name}</li>`;
+    `;
 
-});
-const minor = document.getElementById("minorContributors");
+}
 
-minor.innerHTML = `
+// ============================================
+// Assumptions
+// ============================================
 
-<li>Local Variables</li>
+const assumptions =
+document.getElementById("spaceAssumptions");
 
-<li>Function Parameters</li>
+assumptions.innerHTML="";
 
-`;
-const assumptions = document.getElementById("spaceAssumptions");
+if(report.analysis.containers.length===0){
 
-assumptions.innerHTML = "";
-
-report.analysis.containers.forEach(container => {
-
-    assumptions.innerHTML += `
+    assumptions.innerHTML=`
 
     <li>
 
-        <strong>${container.name}</strong>
-
-        assumed to grow dynamically.
+        Only constant auxiliary memory is assumed.
 
     </li>
 
     `;
 
-});
+}
+
+else{
+
+    report.analysis.containers.forEach(container=>{
+
+        assumptions.innerHTML+=`
+
+        <li>
+
+            <strong>${container.name}</strong>
+
+            is assumed to grow dynamically and may require
+
+            <strong>${container.space}</strong>
+
+            memory.
+
+        </li>
+
+        `;
+
+    });
+
+}
 
 if(report.analysis.recursion>0){
 
-    assumptions.innerHTML += `
+    assumptions.innerHTML+=`
 
     <li>
 
-        Recursive calls contribute stack memory.
+        Recursive calls contribute additional stack memory.
 
     </li>
 

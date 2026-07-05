@@ -1,103 +1,149 @@
-const backButton=document.querySelector(".back-btn");
+// ============================================
+// Back Button
+// ============================================
 
-backButton.addEventListener("click",()=>{
+const backButton = document.querySelector(".back-btn");
 
-    window.location.href="index.html";
+backButton.addEventListener("click", () => {
+
+    window.location.href = "index.html";
 
 });
 
-const report=JSON.parse(localStorage.getItem("analysisReport"));
+const report = JSON.parse(localStorage.getItem("analysisReport"));
 
-if(!report) throw new Error("No Report Found");
+if (!report) {
 
-document.getElementById("currentTime").textContent=
-report.complexity.time.overall;
+    alert("No analysis report found.");
 
-document.getElementById("currentSpace").textContent=
-report.complexity.space.overall;
-
-// Simple estimation
-
-let targetTime=report.complexity.time.overall;
-
-let targetSpace=report.complexity.space.overall;
-
-if(report.analysis.maxLoopDepth>=2){
-
-    targetTime="O(n log n)";
+    throw new Error("No report");
 
 }
 
-if(report.analysis.containers.length){
+// ============================================
+// Current Performance
+// ============================================
 
-    targetSpace="O(1)";
+document.getElementById("currentTime").textContent =
+    report.complexity.time.overall;
+
+document.getElementById("currentSpace").textContent =
+    report.complexity.space.overall;
+
+// ============================================
+// Target Performance
+// ============================================
+
+let targetTime = report.complexity.time.overall;
+let targetSpace = report.complexity.space.overall;
+
+if (report.analysis.maxLoopDepth >= 2) {
+
+    targetTime = "O(n log n)";
 
 }
 
-document.getElementById("targetTime").textContent=
-targetTime;
+if (report.analysis.containers.length > 0) {
 
-document.getElementById("targetSpace").textContent=
-targetSpace;
+    targetSpace = "O(1)";
 
-// Potential
+}
 
-const card=document.getElementById("potentialCard");
+document.getElementById("targetTime").textContent =
+    targetTime;
 
-const level=document.getElementById("potentialLevel");
+document.getElementById("targetSpace").textContent =
+    targetSpace;
 
-const desc=document.getElementById("potentialDescription");
+// ============================================
+// Optimization Potential
+// ============================================
 
-if(report.optimizations.length>=3){
+const card = document.getElementById("potentialCard");
+const level = document.getElementById("potentialLevel");
+const description = document.getElementById("potentialDescription");
+
+card.classList.remove("high", "medium", "low");
+
+const count = report.optimizations.length;
+
+if (count >= 3) {
 
     card.classList.add("high");
 
-    level.textContent="High";
+    level.textContent = "High";
 
-    desc.textContent=
-    "Several optimizations can significantly improve the implementation.";
+    description.textContent =
+        "Several optimization opportunities were detected.";
 
 }
-else if(report.optimizations.length==2){
+
+else if (count === 2) {
 
     card.classList.add("medium");
 
-    level.textContent="Medium";
+    level.textContent = "Medium";
 
-    desc.textContent=
-    "Some useful optimizations were detected.";
+    description.textContent =
+        "A few improvements can make the implementation more efficient.";
 
 }
-else{
+
+else {
 
     card.classList.add("low");
 
-    level.textContent="Low";
+    level.textContent = "Low";
 
-    desc.textContent=
-    "Only minor optimizations are available.";
+    description.textContent =
+        "No major optimization opportunities were detected.";
 
 }
 
+// ============================================
 // Suggestions
+// ============================================
 
-const container=document.getElementById("suggestionsContainer");
+const container = document.getElementById("suggestionsContainer");
 
-container.innerHTML="";
+container.innerHTML = "";
 
-report.optimizations.forEach(opt=>{
+if (count === 0) {
 
-    container.innerHTML+=`
+    container.innerHTML = `
 
     <div class="suggestion-card">
 
-        <h3>${opt.title}</h3>
+        <h3>No Suggestions</h3>
 
-        <p>${opt.description}</p>
+        <p>
+
+            The analyzer did not detect any optimization opportunities.
+
+        </p>
 
     </div>
 
     `;
 
-});
+}
 
+else {
+
+    report.optimizations.forEach(opt => {
+
+        container.innerHTML += `
+
+        <div class="suggestion-card">
+
+            <h3>${opt.title}</h3>
+
+            <p>${opt.description}</p>
+
+        </div>
+
+        `;
+
+    });
+
+}

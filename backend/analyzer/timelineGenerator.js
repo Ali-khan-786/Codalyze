@@ -2,25 +2,40 @@ function generateTimeline(report) {
 
     const timeline = [];
 
+    //----------------------------------------
     // Loops
-    if (report.loops > 0) {
+    //----------------------------------------
 
-        timeline.push({
+    if (report.loopLines && report.loopLines.length > 0) {
 
-            line: "-",
+        report.loopLines.forEach((line, index) => {
 
-            title: `${report.loops} Loop(s) Detected`,
+            let complexity = "O(n)";
 
-            complexity:
-                report.maxLoopDepth === 1
-                    ? "O(n)"
-                    : `O(n^${report.maxLoopDepth})`
+            if (index + 1 >= 2) {
+
+                complexity = `O(n^${index + 1})`;
+
+            }
+
+            timeline.push({
+
+                line,
+
+                title: "Loop Detected",
+
+                complexity
+
+            });
 
         });
 
     }
 
+    //----------------------------------------
     // STL Algorithms
+    //----------------------------------------
+
     for (const algo of report.algorithms) {
 
         timeline.push({
@@ -35,20 +50,11 @@ function generateTimeline(report) {
 
     }
 
-    // Containers
-    for (const container of report.containers) {
+    //----------------------------------------
+    // Sort timeline by line number
+    //----------------------------------------
 
-        timeline.push({
-
-            line: container.line,
-
-            title: container.name,
-
-            complexity: container.space
-
-        });
-
-    }
+    timeline.sort((a, b) => a.line - b.line);
 
     return timeline;
 
