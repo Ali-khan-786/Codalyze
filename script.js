@@ -184,13 +184,13 @@ updateLineNumbers();
 
 timeReport.addEventListener("click", () => {
 
-    window.location.href = "timeReport.html";
+    window.location.href = "timereport.html";
 
 });
 
 spaceReport.addEventListener("click", () => {
 
-    window.location.href = "spaceReport.html";
+    window.location.href = "spacereport.html";
 
 });
 
