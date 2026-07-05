@@ -129,7 +129,7 @@ analyzeBtn.addEventListener("click", async () => {
     localStorage.setItem("sourceCode", code);
     try{
 
-        const response = await fetch("http://127.0.0.1:5000/analyze", {
+        const response = await fetch("https://codalyze-svgb.onrender.com/analyze", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
