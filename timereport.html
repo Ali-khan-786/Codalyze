@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Time Complexity Report | Codalyze</title>
+
+    <link rel="stylesheet"
+          href="report.css">
+
+    <!-- Google Font -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- ===================== HEADER ===================== -->
+
+    <header>
+
+        <button class="back-btn">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            Back to Editor
+
+        </button>
+
+        <h1>Time Complexity Report</h1>
+
+        <p>
+            Complete analysis of your algorithm's execution complexity.
+        </p>
+
+    </header>
+
+
+    <!-- ===================== ESTIMATED COMPLEXITY ===================== -->
+
+    <section class="section">
+
+        <h2>Estimated Complexity</h2>
+
+        <div class="overall-card">
+
+            <h3>Overall Complexity</h3>
+
+            <span id="overallComplexity">
+
+                O(n²)
+
+            </span>
+
+        </div>
+
+        <div class="complexity-grid">
+
+            <div class="complexity-card">
+
+                <h4>Worst Case</h4>
+
+                <p id="worstCase">
+
+                    O(n²)
+
+                </p>
+
+            </div>
+
+            <div class="complexity-card">
+
+                <h4>Average Case</h4>
+
+                <p id="averageCase">
+
+                    O(n²)
+
+                </p>
+
+            </div>
+
+            <div class="complexity-card">
+
+                <h4>Best Case</h4>
+
+                <p id="bestCase">
+
+                    O(n)
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ===================== ANALYSIS SUMMARY ===================== -->
+
+    <section class="section">
+
+        <h2>Analysis Summary</h2>
+
+        <div class="summary-grid">
+
+            <div class="summary-card">
+
+                <i class="fa-solid fa-repeat"></i>
+
+                <h3>Loops</h3>
+
+                <span id="loopCount">
+
+                    2
+
+                </span>
+
+            </div>
+
+            <div class="summary-card">
+
+                <i class="fa-solid fa-layer-group"></i>
+
+                <h3>Nested Loops</h3>
+
+                <span id="nestedLoops">
+
+                    1
+
+                </span>
+
+            </div>
+
+            <div class="summary-card">
+
+                <i class="fa-solid fa-rotate"></i>
+
+                <h3>Recursive Calls</h3>
+
+                <span id="recursiveCalls">
+
+                    0
+
+                </span>
+
+            </div>
+
+            <div class="summary-card">
+
+                <i class="fa-solid fa-code-branch"></i>
+
+                <h3>Function Calls</h3>
+
+                <span id="functionCalls">
+
+                    3
+
+                </span>
+
+            </div>
+
+            <div class="summary-card">
+
+                <i class="fa-solid fa-bolt"></i>
+
+                <h3>Constant Operations</h3>
+
+                <span id="constantOps">
+
+                    18
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ===================== COMPLEXITY TIMELINE ===================== -->
+
+    <section class="section">
+
+        <h2>Complexity Timeline</h2>
+
+        <div class="timeline" id="timelineContainer">
+        </div>
+
+    </section>
+
+
+    <!-- ===================== CONTRIBUTORS ===================== -->
+
+    <section class="section">
+
+        <h2>Complexity Contributors</h2>
+
+        <div class="contributors">
+
+            <div class="contributor-box">
+
+                <h3>
+
+                    Major Contributors
+
+                </h3>
+
+                <ul>
+
+                    <li>Nested Loop</li>
+
+                    <li>Linear Traversal</li>
+
+                </ul>
+
+            </div>
+
+            <div class="contributor-box">
+
+                <h3>
+
+                    Minor Contributors
+
+                </h3>
+
+                <ul>
+
+                    <li>if Statement</li>
+
+                    <li>Variable Assignment</li>
+
+                </ul>
+
+            </div>
+
+            <div class="contributor-box">
+
+                <h3>
+
+                    Ignored Operations
+
+                </h3>
+
+                <ul>
+
+                    <li>cout</li>
+
+                    <li>return</li>
+
+                    <li>Comments</li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ===================== ASSUMPTIONS ===================== -->
+
+    <section class="section">
+
+        <h2>Assumptions</h2>
+
+        <div class="assumption-card">
+
+            <ul>
+
+                <li>
+
+                    <strong>unordered_map</strong>
+                    lookup considered Average
+                    <strong>O(1)</strong>
+
+                </li>
+
+                <li>
+
+                    <strong>sort()</strong>
+                    considered
+                    <strong>O(n log n)</strong>
+
+                </li>
+
+                <li>
+
+                    <strong>vector::push_back()</strong>
+                    considered
+                    <strong>Amortized O(1)</strong>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </section>
+
+</div>
+
+<script src="timereport.js"></script>
+
+</body>
+
+</html>

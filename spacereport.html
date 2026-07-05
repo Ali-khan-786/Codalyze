@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Memory Analysis Report | Codalyze</title>
+
+    <link rel="stylesheet"
+          href="report.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- ================= HEADER ================= -->
+
+    <header>
+
+        <button class="back-btn">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            Back to Editor
+
+        </button>
+
+        <h1>Memory Analysis Report</h1>
+
+        <p>
+
+            Complete analysis of auxiliary memory usage.
+
+        </p>
+
+    </header>
+
+
+    <!-- ================= ESTIMATED SPACE ================= -->
+
+    <section class="section">
+
+        <h2>Estimated Auxiliary Space</h2>
+
+        <div class="overall-card">
+
+            <h3>Overall Auxiliary Space</h3>
+
+            <span id="overallSpace">
+
+                O(n)
+
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= DATA STRUCTURES ================= -->
+
+    <section class="section">
+
+        <h2>Data Structures Used</h2>
+
+        <div class="contributors">
+
+            <div class="contributor-box">
+
+                <h3>Major Contributors</h3>
+
+                <ul id="majorContributors">
+
+                </ul>
+
+            </div>
+
+            <div class="contributor-box">
+
+                <h3>Minor Contributors</h3>
+
+                <ul id="minorContributors">
+
+                </ul>
+
+            </div>
+
+        </div>        
+
+    </section>
+
+
+    <!-- ================= MEMORY BREAKDOWN ================= -->
+
+    <section class="section">
+
+        <h2>Memory Breakdown</h2>
+
+        <div class="timeline" id="memoryTimeline">
+        </div>
+
+    </section>
+
+
+    <!-- ================= CONTRIBUTORS ================= -->
+
+    <section class="section">
+
+        <h2>Memory Contributors</h2>
+
+        <div class="contributors">
+
+            <div class="contributor-box">
+
+                <h3>
+
+                    Major Contributors
+
+                </h3>
+
+                <ul>
+
+                    <li>vector</li>
+
+                    <li>unordered_map</li>
+
+                </ul>
+
+            </div>
+
+            <div class="contributor-box">
+
+                <h3>
+
+                    Minor Contributors
+
+                </h3>
+
+                <ul>
+
+                    <li>Local Variables</li>
+
+                    <li>Function Parameters</li>
+
+                </ul>
+
+            </div>
+
+            <div class="contributor-box">
+
+                <h3>
+
+                    Ignored Operations
+
+                </h3>
+
+                <ul>
+
+                    <li>cout</li>
+
+                    <li>return</li>
+
+                    <li>Comments</li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= ASSUMPTIONS ================= -->
+
+    <section class="section">
+
+        <h2>Assumptions</h2>
+
+        <div class="assumption-card">
+
+            <ul id="spaceAssumptions">
+                
+            </ul>
+
+        </div>
+
+    </section>
+
+</div>
+
+<script src="spacereport.js"></script>
+
+</body>
+
+</html>

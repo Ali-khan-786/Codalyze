@@ -1,0 +1,698 @@
+/* ===========================================
+   GOOGLE FONT
+=========================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/* ===========================================
+   RESET
+=========================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:'Poppins',sans-serif;
+
+    background:#0d1117;
+
+    color:#f5f5f5;
+
+    min-height:100vh;
+
+}
+
+
+/* ===========================================
+   MAIN CONTAINER
+=========================================== */
+
+.container{
+
+    width:92%;
+
+    max-width:1200px;
+
+    margin:auto;
+
+    padding:40px 0 70px;
+
+}
+
+
+/* ===========================================
+   HEADER
+=========================================== */
+
+header{
+
+    text-align:center;
+
+    margin-bottom:40px;
+
+}
+
+header h1{
+
+    font-size:3.3rem;
+
+    font-weight:700;
+
+    color:#58a6ff;
+
+    letter-spacing:1px;
+
+}
+
+.subtitle{
+
+    margin-top:10px;
+
+    color:#9ca3af;
+
+    font-size:1.05rem;
+
+    font-weight:400;
+
+}
+
+
+/* ===========================================
+   TOOLBAR
+=========================================== */
+
+.toolbar{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    background:#161b22;
+
+    border:1px solid #30363d;
+
+    border-radius:12px;
+
+    padding:18px 25px;
+
+    margin-bottom:25px;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+}
+
+
+/* ===========================================
+   LANGUAGE BOX
+=========================================== */
+
+.language-box{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+}
+
+.language-box label{
+
+    font-size:.92rem;
+
+    color:#8b949e;
+
+}
+
+.language-box select{
+
+    width:230px;
+
+    padding:10px 15px;
+
+    border-radius:8px;
+
+    background:#0d1117;
+
+    color:white;
+
+    border:1px solid #30363d;
+
+    outline:none;
+
+    font-size:.95rem;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.language-box select:hover{
+
+    border-color:#58a6ff;
+
+}
+
+.language-box select:focus{
+
+    border-color:#58a6ff;
+
+}
+
+
+/* ===========================================
+   STATUS
+=========================================== */
+
+.status-box{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:flex-end;
+
+    gap:8px;
+
+}
+
+.status-box span{
+
+    font-size:.9rem;
+
+    color:#8b949e;
+
+}
+
+.status{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:10px 18px;
+
+    border-radius:30px;
+
+    font-size:.92rem;
+
+    font-weight:500;
+
+    transition:.3s;
+
+}
+
+
+/* ===========================================
+   STATUS DOT
+=========================================== */
+
+.dot{
+
+    width:10px;
+
+    height:10px;
+
+    border-radius:50%;
+
+}
+
+
+/* READY */
+
+.ready{
+
+    background:rgba(46,160,67,.15);
+
+    color:#3fb950;
+
+}
+
+.ready .dot{
+
+    background:#3fb950;
+
+}
+
+
+/* ANALYZING */
+
+.analyzing{
+
+    background:rgba(210,153,34,.15);
+
+    color:#d29922;
+
+}
+
+.analyzing .dot{
+
+    background:#d29922;
+
+}
+
+
+/* COMPLETED */
+
+.completed{
+
+    background:rgba(88,166,255,.18);
+
+    color:#58a6ff;
+
+}
+
+.completed .dot{
+
+    background:#58a6ff;
+
+}
+/* ===========================================
+   CODE EDITOR
+=========================================== */
+
+.editor-section{
+
+    background:#161b22;
+
+    border:1px solid #30363d;
+
+    border-radius:12px;
+
+    overflow:hidden;
+
+    margin-bottom:30px;
+
+}
+
+.editor-header{
+
+    background:#21262d;
+
+    color:#c9d1d9;
+
+    padding:14px 20px;
+
+    font-size:.95rem;
+
+    font-weight:600;
+
+    border-bottom:1px solid #30363d;
+
+}
+
+.editor-container{
+
+    display:flex;
+
+    height:480px;
+
+    overflow:hidden;
+
+}
+
+/* ===========================================
+   LINE NUMBERS
+=========================================== */
+
+.line-numbers{
+
+    width:60px;
+
+    background:#0d1117;
+
+    color:#6e7681;
+
+    text-align:right;
+
+    padding:18px 12px;
+
+    font-family:Consolas, monospace;
+
+    font-size:15px;
+
+    line-height:24px;
+
+    user-select:none;
+
+    overflow:hidden;
+
+    border-right:1px solid #30363d;
+
+}
+
+/* ===========================================
+   TEXTAREA
+=========================================== */
+
+#codeEditor{
+
+    flex:1;
+
+    resize:none;
+
+    border:none;
+
+    outline:none;
+
+    background:#161b22;
+
+    color:#f8f8f2;
+
+    padding:18px;
+
+    font-size:15px;
+
+    line-height:24px;
+
+    font-family:Consolas, monospace;
+
+    overflow:auto;
+
+    white-space:pre;
+
+    tab-size:4;
+
+}
+
+#codeEditor::placeholder{
+
+    color:#6e7681;
+
+}
+
+/* ===========================================
+   ANALYZE BUTTON
+=========================================== */
+
+.button-container{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:18px;
+
+    margin-bottom:35px;
+
+    flex-wrap:wrap;
+
+}
+
+#analyzeBtn,
+#newCodeBtn{
+
+    padding:14px 42px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:10px;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+#analyzeBtn{
+
+    background:#30363d;
+
+    color:#8b949e;
+
+    cursor:not-allowed;
+
+}
+
+#analyzeBtn.enabled{
+
+    background:#238636;
+
+    color:white;
+
+    cursor:pointer;
+
+}
+
+#analyzeBtn.enabled:hover{
+
+    background:#2ea043;
+
+}
+
+#newCodeBtn{
+
+    background:#da3633;
+
+    color:white;
+
+    cursor:pointer;
+
+}
+
+#newCodeBtn:hover{
+
+    background:#f85149;
+
+}
+
+#newCodeBtn.hidden{
+
+    display:none;
+
+}
+
+/* ===========================================
+   REPORT SECTION
+=========================================== */
+
+.reports{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+
+    gap:25px;
+
+    margin-top:20px;
+
+}
+
+.hidden{
+
+    display:none;
+
+}
+
+/* ===========================================
+   REPORT CARD
+=========================================== */
+
+.report-card{
+
+    background:#161b22;
+
+    border:1px solid #30363d;
+
+    border-radius:12px;
+
+    padding:25px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.report-card:hover{
+
+    transform:translateY(-5px);
+
+    border-color:#58a6ff;
+
+    box-shadow:0 12px 28px rgba(0,0,0,.35);
+
+}
+
+.icon{
+
+    width:60px;
+
+    height:60px;
+
+    border-radius:12px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:#21262d;
+
+    color:#58a6ff;
+
+    font-size:24px;
+
+}
+
+.report-info h3{
+
+    margin-bottom:6px;
+
+    color:white;
+
+    font-size:18px;
+
+}
+
+.report-info p{
+
+    color:#8b949e;
+
+    font-size:14px;
+
+    line-height:22px;
+
+}
+
+/* ===========================================
+   SCROLLBAR
+=========================================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+    height:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#0d1117;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#30363d;
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#58a6ff;
+
+}
+
+/* ===========================================
+   RESPONSIVE
+=========================================== */
+
+@media(max-width:900px){
+
+    .toolbar{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+    }
+
+    .status-box{
+
+        align-items:flex-start;
+
+    }
+
+}
+
+@media(max-width:700px){
+
+    header h1{
+
+        font-size:2.5rem;
+
+    }
+
+    .subtitle{
+
+        font-size:.95rem;
+
+    }
+
+    .editor-container{
+
+        height:380px;
+
+    }
+
+    .line-numbers{
+
+        width:50px;
+
+        font-size:14px;
+
+    }
+
+    #codeEditor{
+
+        font-size:14px;
+
+    }
+
+}
+
+@media(max-width:500px){
+
+    .language-box select{
+
+        width:100%;
+
+    }
+
+    .container{
+
+        width:95%;
+
+    }
+
+    #analyzeBtn{
+
+        width:100%;
+
+    }
+
+}

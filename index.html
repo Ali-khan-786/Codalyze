@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codalyze | Multi-Language Static Code Analyzer</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- ================= HEADER ================= -->
+
+        <header>
+
+            <h1>Codalyze</h1>
+
+            <p class="subtitle">
+                Multi-Language Static Code Analyzer
+            </p>
+
+        </header>
+
+        <!-- ============== TOOLBAR ================= -->
+
+        <section class="toolbar">
+
+            <div class="language-box">
+
+                <label for="language">
+                    Language
+                </label>
+
+                <select id="language">
+
+                    <option selected>C++</option>
+
+                    <option disabled>
+                        C (Coming Soon)
+                    </option>
+
+                    <option disabled>
+                        Java (Coming Soon)
+                    </option>
+
+                    <option disabled>
+                        Python (Coming Soon)
+                    </option>
+
+                    <option disabled>
+                        JavaScript (Coming Soon)
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="status-box">
+
+                <span>Status</span>
+
+                <div id="statusIndicator" class="status ready">
+
+                    <span class="dot"></span>
+
+                    Ready
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ================= CODE EDITOR ================= -->
+
+        <section class="editor-section">
+
+            <div class="editor-header">
+
+                <span>
+                    C++ Editor
+                </span>
+
+            </div>
+
+            <div class="editor-container">
+
+                <!-- Line Numbers -->
+
+                <div id="lineNumbers" class="line-numbers">
+
+                    1
+
+                </div>
+
+                <!-- Code -->
+
+                <textarea
+                        id="codeEditor"
+                        spellcheck="false"
+                        placeholder="Paste / Write your code here..."></textarea>
+
+            </div>
+
+        </section>
+
+        <!-- ================= ANALYZE BUTTON ================= -->
+
+        <div class="button-container">
+
+            <button
+                id="analyzeBtn"        
+                disabled>
+
+                Analyze
+
+            </button>
+
+            <button
+                id="newCodeBtn"
+                class="hidden">
+
+                New Code
+
+            </button>
+
+        </div>
+
+        <!-- ================= REPORTS ================= -->
+
+        <section id="reportSection"
+                 class="reports hidden">
+
+            <div class="report-card"
+                 id="timeReport">
+
+                <div class="icon">
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                </div>
+
+                <div class="report-info">
+
+                    <h3>
+
+                        Time Complexity Report
+
+                    </h3>
+
+                    <p>
+
+                        View complete time complexity analysis.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="report-card"
+                 id="spaceReport">
+
+                <div class="icon">
+
+                    <i class="fa-solid fa-memory"></i>
+
+                </div>
+
+                <div class="report-info">
+
+                    <h3>
+
+                        Memory Analysis Report
+
+                    </h3>
+
+                    <p>
+
+                        View complete auxiliary memory analysis.
+
+                    </p>
+
+                </div>
+            </div>
+
+            <div class="report-card"
+                id="optimizationReport">
+
+                <div class="icon">
+
+                    <i class="fa-solid fa-rocket"></i>
+
+                </div>
+
+                <div class="report-info">
+
+                    <h3>
+
+                        Optimization Suggestions
+
+                    </h3>
+
+                    <p>
+
+                         Discover ways to improve both time and space efficiency.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
